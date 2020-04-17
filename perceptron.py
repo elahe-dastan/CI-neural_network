@@ -5,10 +5,13 @@ class Perceptron:
     def __init__(self, n_epoch=100, lr=0.05):
         self.n_epoch = n_epoch
         self.lr = lr
-        self.w = np.array([1.0, 1.0])
-        self.b = 1.0
+        self.w = []
+        self.b = 0.0
 
     def fit(self, X, y):
+        self.w = np.random.normal(loc=0.0, scale=0.01, size=X.shape[1])
+        self.b = np.random.normal(loc=0.0, scale=0.01)
+
         for _ in range(self.n_epoch):
             grad_b = 0
             grad_w = np.zeros(X.shape[1])
