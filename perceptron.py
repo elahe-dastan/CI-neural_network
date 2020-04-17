@@ -17,8 +17,8 @@ class Perceptron:
             grad_w = np.zeros(X.shape[1])
             for xi, label in zip(X, y):
                 c = -label * (1 - self.predict(xi))
-                grad_b = c
-                grad_w = xi * c
+                grad_b += c
+                grad_w += xi * c
             self.w -= (self.lr * grad_w) / y.size
             self.b -= (self.lr * grad_b) / y.size
         return self
