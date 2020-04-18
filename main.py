@@ -2,8 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-from perceptron import Perceptron
-from perceptron2 import Perceptron2
+from neural_network import NeuralNetwork
 
 
 def read_data(file_name):
@@ -33,11 +32,13 @@ def plot(X, y):
 
 X, y = read_data('dataset.csv')
 
-p = Perceptron2()
-p1 = p.fit(X, y)
+plot(X, y)
+
+n = NeuralNetwork(X, y)
+n1 = n.fit()
 predicted_y = []
 
 for x in X:
-    predicted_y.append(p1.predict(x))
+    predicted_y.append(n1.predict(x))
 
 plot(X, predicted_y)
