@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
+import perceptron
 from neural_network import NeuralNetwork
 from sklearn.model_selection import train_test_split
 
@@ -47,11 +48,24 @@ plot(X, y)
 # training and test data every time I run the code so the result I get may differ each time.
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=True)
 
-n = NeuralNetwork(X, y)
-n1 = n.fit()
+# Make a perceptron and train it
+p = perceptron.Perceptron()
+p.fit(X_train, y_train)
+
+# Now I want to test the trained perceptron
 predicted_y = []
 
-for x in X:
-    predicted_y.append(n1.predict(x))
+for x in X_test:
+    predicted_y.append(p.predict(x))
 
-plot(X, predicted_y)
+plot(X_test, predicted_y)
+
+
+n = NeuralNetwork(X, y)
+n1 = n.fit()
+# predicted_y = []
+#
+# for x in X:
+#     predicted_y.append(n1.predict(x))
+#
+# plot(X, predicted_y)

@@ -14,3 +14,7 @@ Then I splitted the data as 80% training and 20% test data
 In this part I want to implement a single perceptron, the cost function, the derivatives and the activation function I<br/>
 used are shown below <br/>
 ![](Figures/derivation1.jpg) 
+
+#### 4. Train neural network
+Now the perceptron is trained by training data and then tested, the important thing to do in this part is to give <br/>
+appropriate number of epochs and learning rate to perceptron 
