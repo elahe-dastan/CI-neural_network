@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 from neural_network import NeuralNetwork
-
+from sklearn.model_selection import train_test_split
 
 # This function gets the name of a CSV file and returns the coordinates of the points
 # which are the inputs of the neural network and the labels which are the outputs
@@ -42,6 +42,10 @@ def plot(X, y):
 X, y = read_data('dataset.csv')
 
 plot(X, y)
+
+# I want to split the data to training and test data but before doing it I shuffle the data to get a different
+# training and test data every time I run the code so the result I get may differ each time.
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=True)
 
 n = NeuralNetwork(X, y)
 n1 = n.fit()
