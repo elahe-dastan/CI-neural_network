@@ -23,7 +23,7 @@ def read_data(file_name):
     # one X1 and X2 so I got the transpose of array X
     Xt = np.transpose(X)
 
-    return np.array(Xt), data["Label"]
+    return np.array(Xt), data["Label"].values
 
 
 X, y = read_data('dataset.csv')
@@ -52,7 +52,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle
 n = NeuralNetwork(X.shape[1])
 n.fit(X_train, y_train)
 
-border(X, n.p1)
+border(X, n)
 
 # Test the trained neural network
 predicted_y = []
