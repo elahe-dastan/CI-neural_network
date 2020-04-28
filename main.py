@@ -52,6 +52,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle
 n = NeuralNetwork(X.shape[1])
 n.fit(X_train, y_train)
 
+border(X, n.p1)
+border(X, n.p2)
 border(X, n)
 
 # Test the trained neural network

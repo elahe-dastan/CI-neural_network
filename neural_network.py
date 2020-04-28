@@ -3,7 +3,7 @@ import random
 
 
 class NeuralNetwork:
-    def __init__(self, n_inputs, n_epoch=10000, lr=0.7):
+    def __init__(self, n_inputs, n_epoch=6000, lr=0.15):
         self.n_epoch = n_epoch
         self.lr = lr
         self.p1 = Node(n_inputs)
@@ -23,6 +23,8 @@ class NeuralNetwork:
             predicted_z1 = self.p2.predict(xi)
             predicted_y = self.p3.predict([predicted_z0, predicted_z1])
 
+            print((predicted_y - label) * (predicted_y - label))
+
             c = 2 * (predicted_y - label) * predicted_y * (1 - predicted_y)
 
             self.p1.grad_b = c * self.p3.w[0] * predicted_z0 * (1 - predicted_z0)
@@ -34,9 +36,9 @@ class NeuralNetwork:
             self.p3.grad_b = c
             self.p3.grad_w = c * np.array([predicted_z0, predicted_z1])
 
-            self.p1.improve(self.lr, y.size)
-            self.p2.improve(self.lr, y.size)
-            self.p3.improve(self.lr, y.size)
+            self.p1.improve(self.lr)
+            self.p2.improve(self.lr)
+            self.p3.improve(self.lr)
 
         return self
 
@@ -48,8 +50,8 @@ class NeuralNetwork:
 
 class Node:
     def __init__(self, n_columns):
-        self.w = np.random.normal(loc=0.0, scale=0.5, size=n_columns)
-        self.b = np.random.normal(loc=0.0, scale=0.5)
+        self.w = np.random.normal(loc=0.0, scale=0.1, size=n_columns)
+        self.b = np.random.normal(loc=0.0, scale=0.1)
         self.n_columns = n_columns
         self.grad_w = np.zeros(n_columns)
         self.grad_b = 0
@@ -58,6 +60,6 @@ class Node:
         return 1 / (1 + np.exp(-(np.dot(X, self.w) + self.b)))
 
     # Amount if coefficients will be subtracted by derivation of cost
-    def improve(self, lr, n):
-        self.w -= (lr * self.grad_w) / n
-        self.b -= (lr * self.grad_b) / n
+    def improve(self, lr):
+        self.w -= (lr * self.grad_w)
+        self.b -= (lr * self.grad_b)

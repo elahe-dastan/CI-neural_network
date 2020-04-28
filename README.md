@@ -34,3 +34,15 @@ implement and the derivations I need are shown below <br/>
 Just like part [4](#4-train-perceptron) I examined different learning rates and number of epochs and chose a relatively <br/>
 good one for both and then I tested the trained network like part [5](#5-scattering-test-data)<br/>
 ![](Figures/Figure_1-2.png)
+
+#### Points and conclusion
+First of all consider that this sample is small and I cannot make a comprehensive conclusion but I here using <br/>
+two layers of perceptrons had a better result than just one perceptron and WHY?!:thinking:<br/>
+One perceptron can just classify data into two parts in other words it draws one line so if the data we have can be <br/>
+separated nicely using a straight line then just one perceptron is enough but the data we have needs at least two straight <br/>
+lines to do a good separation so we need two perceptrons in the first layer to draw those two lines and a third one to <br/>
+merge those two.
+
+If what I concluded was right so for a figure like below we need at least four straight lines <br/>
+and as a result four perceptrons in the first layer<br/>
+![](Figures/question.jpg)
