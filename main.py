@@ -34,23 +34,25 @@ plot(X, y)
 # training and test data every time I run the code so the result I get may differ each time.
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=True)
 
-# Make a perceptron and train it
-p = perceptron.Perceptron()
-p.fit(X_train, y_train)
-
-border(X, p)
-
-# Now I want to test the trained perceptron
-predicted_y = []
-
-for x in X_test:
-    predicted_y.append(p.predict(x))
-
-plot(X_test, predicted_y)
+# # Make a perceptron and train it
+# p = perceptron.Perceptron()
+# p.fit(X_train, y_train)
+#
+# border(X, p)
+#
+# # Now I want to test the trained perceptron
+# predicted_y = []
+#
+# for x in X_test:
+#     predicted_y.append(p.predict(x))
+#
+# plot(X_test, predicted_y)
 
 # Make a neural network and train it
 n = NeuralNetwork(X.shape[1])
 n.fit(X_train, y_train)
+
+border(X, n.p1)
 
 # Test the trained neural network
 predicted_y = []
