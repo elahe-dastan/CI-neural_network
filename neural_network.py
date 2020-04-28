@@ -2,18 +2,18 @@ import numpy as np
 
 
 class NeuralNetwork:
-    def __init__(self, X, y, n_epoch=5000, lr=0.5):
+    def __init__(self, n_inputs, n_epoch=10000, lr=0.3):
         self.n_epoch = n_epoch
         self.lr = lr
-        self.p1 = Node(X.shape[1])
-        self.p2 = Node(X.shape[1])
-        self.p3 = Node(X.shape[1])
-        self.X = X
-        self.y = y
+        self.p1 = Node(n_inputs)
+        self.p2 = Node(n_inputs)
+        self.p3 = Node(n_inputs)
 
-    def fit(self):
+    # The neural network will be trained using this function in which the coefficients of each perceptron get<br/>
+    # closer and closer to what they should be in the number of epochs
+    def fit(self, X, y):
         for _ in range(self.n_epoch):
-            for xi, label in zip(self.X, self.y):
+            for xi, label in zip(X, y):
                 predicted_z0 = self.p1.predict(xi)
                 predicted_z1 = self.p2.predict(xi)
                 predicted_y = self.p3.predict([predicted_z0, predicted_z1])
@@ -29,9 +29,9 @@ class NeuralNetwork:
                 self.p3.grad_b += c
                 self.p3.grad_w += c * np.array([predicted_z0, predicted_z1])
 
-            self.p1.improve(self.lr, self.y.size)
-            self.p2.improve(self.lr, self.y.size)
-            self.p3.improve(self.lr, self.y.size)
+            self.p1.improve(self.lr, y.size)
+            self.p2.improve(self.lr, y.size)
+            self.p3.improve(self.lr, y.size)
 
         return self
 
@@ -52,6 +52,7 @@ class Node:
     def predict(self, X):
         return 1 / (1 + np.exp(-(np.dot(X, self.w) + self.b)))
 
+    # Amount if coefficients will be subtracted by derivation of cost
     def improve(self, lr, n):
         self.w -= (lr * self.grad_w) / n
         self.grad_w = np.zeros(self.n_columns)

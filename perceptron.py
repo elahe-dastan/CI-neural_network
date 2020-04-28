@@ -2,7 +2,7 @@ import numpy as np
 
 
 class Perceptron:
-    def __init__(self, n_epoch=1000, lr=0.5):
+    def __init__(self, n_epoch=5000, lr=0.4):
         self.n_epoch = n_epoch
         self.lr = lr
         self.w = []
